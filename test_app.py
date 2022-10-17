@@ -13,6 +13,6 @@ def test_URL_Page():
     response = app.test_client().get('/your-url')
     assert response.status_code == 302
     
- def test_error_page():
+def test_error_page():
     response = app.test_client().get('/page_not_found')
     assert response.status_code == 404
