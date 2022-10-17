@@ -11,7 +11,7 @@ def test_home_page():
     
 def test_URL_Page():
     response = app.test_client().get('/your-url')
-    assert response.status_code == 200
+    assert response.status_code == 302
 
 #  def test_error_page():
 #   response = app.test_client().get('/index.html')
