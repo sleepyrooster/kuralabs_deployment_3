@@ -14,5 +14,5 @@ def test_URL_Page():
     assert response.status_code == 302
 
  def test_error_page():
-  response = app.test_client().get('/index')
-  assert response.status_code == 404
+  response = app.test_client().get('/something/really/weird')
+  assertEqual(response.status_code, 404)
