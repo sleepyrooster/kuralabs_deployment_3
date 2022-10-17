@@ -8,3 +8,7 @@ def test_quick():
 def test_home_page():
     response = app.test_client().get('/')
     assert response.status_code == 200
+
+ def test_error_page():
+  response = app.test_client().get('/index.html')
+  assert response.status_code == 404
