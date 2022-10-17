@@ -18,5 +18,5 @@ def test_error_page():
     assert response.status_code == 404
 
 def test_error_page():
-    response = app.test_client().get('/page_not_found')
+    response = app.test_client().get('/x')
     assert response.status_code == 404
