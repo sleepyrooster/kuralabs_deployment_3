@@ -6,7 +6,21 @@ The goal of deployment 3 was:
 2) Linking two EC2s in two different VPCs and using one as the manager and the other as a deployment agent.
 
 ### Observation
-
+To acomplish this deployment, I went though the following actions:
+1) An EC2 which had Jenkins installed already was used.
+2) A second EC2 which was created on another VPC was created. It was used as the Jenkins Agent for the deploy stage. Ports 22 and 5000 was opened up for this deployment.
+3) On the second EC2, the following packages were installed:
+- python3-pip
+- nginx
+- default-jre
+- python3.10-venv
+4) Logging into the Jenkins Server, a new agent was created and was given the name of "awsDeploy"
+5) After SSH into the second EC2, the `etc\ngnix\site-enabled\default` was edited so that nginx could use port 5000 instead of port 80. Also created a proxy_pass variable in the `location{}` part of the file.
+6) The "Pipeline Keep Running Step" plugin was added on the Jenkins Server so that Jenkins wouldn't kill the application after the pipeline went through.
+7) The JenkinsFile was modified so that 
+- The pipeline could stop Gunicorn if it was running prior to the deploy stage
+- The Jenkins could deploy the application on the Jenkins Agent and host the application using nginx.
+8) A multi-pipeline was created on the Jenkins Server to build, test and deploy the application. Once the Deployment 3 repository was connected to the Jenkins server, the repository was scanned and the application ran.
 
 
 ### Changes To Pipeline
@@ -39,3 +53,7 @@ To notify myself on any changes in the repository, i used the "watch" tab on the
 
 
 ### Errors while performing deployment
+#### Creating test fucnctions
+When I was creating the test functions for the `test.py` I ran into a indentation error. I solved this error by backscpacing the def.
+![error1](images/jenkins_error1.png)
+![error2](images/Try_Create_Error_404_function.png)
